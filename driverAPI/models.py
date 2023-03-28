@@ -14,6 +14,9 @@ class Driver(models.Model):
     license = models.CharField(max_length=80, unique=True)
     car_no = models.CharField(max_length=80, unique=True)
 
+    def __str__(self):
+        return self.first_name
+
 
 class DriverLocation(models.Model):
     """
@@ -33,8 +36,8 @@ class DriverRidesHistory(models.Model):
 
     driver_id = models.ForeignKey(Driver, on_delete=models.CASCADE)
     passenger_id = models.ForeignKey('passengerAPI.Passenger', on_delete=models.CASCADE)
-    source_address = models.TextField()
-    destination_address = models.TextField()
+    source_address = models.TextField(max_length=500)
+    destination_address = models.TextField(max_length=500)
     booked_time = models.DateTimeField(auto_now_add=True)
     car_no = models.CharField(max_length=80, unique=True)
     passenger_name = models.CharField(max_length=80)
